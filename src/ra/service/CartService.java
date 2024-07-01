@@ -6,7 +6,7 @@ import ra.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CartItemService implements ICartItem {
+public class CartService implements ICartItem {
     public static List<CartItem> cartItems = new ArrayList<>();
     public Product product;
 
@@ -44,19 +44,19 @@ public class CartItemService implements ICartItem {
     }
 
     private CartItem findByProduct(Product product) {
-        return null;
-
-    }
-
-    private CartItem findByProduct(Integer id) {
-
         for (CartItem cartItem : cartItems) {
-            if (cartItem.getCartItemId() == id){
+            if (cartItem.getProduct().equals(product)) {
                 return cartItem;
             }
         }
         return null;
+
     }
+
+//    private CartItem findByProduct(Integer id) {
+//
+//
+//    }
 
     @Override
     public Object findById(Object o) {

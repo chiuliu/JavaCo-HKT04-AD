@@ -1,7 +1,7 @@
 package ra.model;
 
 import ra.run.ProductManagement;
-import ra.service.CartItemService;
+import ra.service.CartService;
 import ra.service.ProductService;
 
 import java.util.Scanner;
@@ -100,13 +100,13 @@ public class CartItem {
     }
 
     private int inputCartItemId() {
-        if (CartItemService.cartItems.isEmpty()){
+        if (CartService.cartItems.isEmpty()){
             return 1;
         }else {
-            int maxIndex = CartItemService.cartItems.get(0).getCartItemId();
-            for (int i = 1; i < CartItemService.cartItems.size(); i++) {
-                if (CartItemService.cartItems.get(i).getCartItemId() > maxIndex) {
-                    maxIndex = CartItemService.cartItems.get(i).getCartItemId();
+            int maxIndex = CartService.cartItems.get(0).getCartItemId();
+            for (int i = 1; i < CartService.cartItems.size(); i++) {
+                if (CartService.cartItems.get(i).getCartItemId() > maxIndex) {
+                    maxIndex = CartService.cartItems.get(i).getCartItemId();
                 }
             }
             return maxIndex +1 ;

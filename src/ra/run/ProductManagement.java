@@ -1,19 +1,17 @@
 package ra.run;
 
+import ra.model.CartItem;
 import ra.model.Catalog;
 import ra.model.Product;
-import ra.service.CatalogService;
-import ra.service.ICatalogFeature;
-import ra.service.IProductFeature;
-import ra.service.ProductService;
+import ra.service.*;
 
 import java.util.Collections;
 import java.util.Scanner;
 
 public class ProductManagement {
-    public static final ICatalogFeature catalogFuture = new CatalogService();
-    public static final IProductFeature productFuture = new ProductService();
-
+    public static final CatalogService catalogFuture = new CatalogService();
+    public static final ProductService productFuture = new ProductService();
+    public static final CartService CART_SERVICE = new CartService();
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -281,9 +279,15 @@ public class ProductManagement {
     }
 
     private static void allDeleteProductCart() {
+        CART_SERVICE.getAll().clear();
+        System.out.println("Đã xóa tất cả.");
+
     }
 
     private static void deleteProductInCart(Scanner scanner) {
+        System.out.println("Chọn Id cart mà bạn muốn xóa : ");
+        int indexDelete = Integer.parseInt(scanner.nextLine());
+        CART_SERVICE.delete(indexDelete);
         
     }
 
@@ -296,9 +300,9 @@ public class ProductManagement {
     }
 
     private static void addProductToCart(Scanner scanner) {
-        
-        
-        
+        CartItem cartItem = new CartItem();
+        cartItem.inputCartItemData(scanner);
+        CART_SERVICE.save(cartItem);
     }
 
     private static void showAllProduct() {
